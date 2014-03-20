@@ -14,7 +14,9 @@ http://codex.wordpress.org/Creating_Admin_Themes
 ******************************************************************/
 
 
-body.login {}
+body.login {
+	background: #eee;
+}
 
 
 #login {} /* the form box */
