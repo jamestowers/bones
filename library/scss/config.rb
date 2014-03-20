@@ -3,7 +3,6 @@
 # quickly dive right in.
 # For more info about compass + SASS: http://net.tutsplus.com/tutorials/html-css-techniques/using-compass-and-sass-for-css-in-your-next-project/
 
-
 #########
 # 1. Set this to the root of your project when deployed:
 http_path = "/"
@@ -28,3 +27,11 @@ output_style = :expanded
 
 # don't touch this
 preferred_syntax = :scss
+
+require 'fileutils'
+on_stylesheet_saved do |file|
+  if File.exists?(file) && File.basename(file) == "style.css"
+    puts "Moving: #{file}"
+    FileUtils.mv(file, File.dirname(file) + "/../" + File.basename(file))
+  end
+end
