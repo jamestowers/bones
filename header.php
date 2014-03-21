@@ -16,7 +16,7 @@
 		<?php // mobile meta (hooray!) ?>
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scallable=no"/>
 
 		<?php // icons & favicons (for more: http://www.jonathantneal.com/blog/understand-the-favicon/) ?>
 		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-icon-touch.png">
@@ -28,10 +28,11 @@
 		<meta name="msapplication-TileColor" content="#f01d4f">
 		<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/library/images/win8-tile-icon.png">
 
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
 		<?php // wordpress head functions ?>
-		<?php wp_head(); ?>
+			<?php wp_head(); ?>
 		<?php // end of wordpress head ?>
 
 		<?php // drop Google Analytics Here ?>
@@ -39,25 +40,18 @@
 
 	</head>
 
-	<body <?php body_class(); ?>>
+	<body>
 
-		<div id="container">
+		<div id="wrapper" class="">
 
-			<header class="header" role="banner">
-
-				<div id="inner-header" class="wrap clearfix">
-
-					<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
-					<p id="logo" class="h1"><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a></p>
-
-					<?php // if you'd like to use the site description you can un-comment it below ?>
-					<?php // bloginfo('description'); ?>
-
-
-					<nav role="navigation">
-						<?php bones_main_nav(); ?>
-					</nav>
-
-				</div>
-
+			<header class="header clearfix box" role="banner">
+				<a id="logo" href="<?php echo home_url(); ?>" rel="nofollow"><h1><?php bloginfo('name'); ?></h1></a>
+				<?php // bloginfo('description'); ?>
+				<a href="#" id="menu-toggle"><span></span></a>
 			</header>
+
+			<nav role="navigation" id="main-nav">
+				<?php bones_main_nav(); ?>
+			</nav>
+
+			<div id="content" class="page">

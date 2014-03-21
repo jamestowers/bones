@@ -21,7 +21,7 @@ taxonomy-shoes.php
 
 						<div id="main" class="eightcol first clearfix" role="main">
 
-							<h1 class="archive-title h2"><span><?php _e( 'Posts Categorized:', 'bonestheme' ); ?></span> <?php single_cat_title(); ?></h1>
+							<h1 class="page-title"><span><?php _e( 'Posts Categorized:', 'bonestheme' ); ?></span> <?php single_cat_title(); ?></h1>
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 

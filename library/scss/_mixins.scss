@@ -59,10 +59,17 @@ $alert-blue:        #d5edf8;
 $black:             #000;
 $white:             #fff;
 
-$bones-pink:        #f01d4f;
-$bones-blue:        #1990db;
+$color1:        #0FB5E4;
+$color2:        #1990db;
 
-$link-color:        $bones-pink;
+$grey1: #efefef;
+$grey2: #dddddd;
+$grey3: #b1b1b1;
+$grey4: #666666;
+$grey5: #313131;
+$grey6: #212121;
+
+$link-color:        $color1;
 $link-hover:        darken($link-color, 9%);
 
 /*
@@ -76,7 +83,8 @@ http://sachagreif.com/sass-color-variables/
 TYPOGRAPHY
 *********************/
 
-$sans-serif:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+$sans-serif:        'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header:            Montserrat, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $serif:             "Georgia", Cambria, Times New Roman, Times, serif;
 
 
@@ -150,37 +158,71 @@ span.amp {
 TRANSITION
 *********************/
 
-/*
-I totally rewrote this to be cleaner and easier to use.
-You'll need to be using Sass 3.2+ for these to work.
-Thanks to @anthonyshort for the inspiration on these.
-USAGE: @include transition(all 0.2s ease-in-out);
-*/
-
-@mixin transition($transition...) {
-	// defining prefixes so we can use them in mixins below
-	$prefixes:      ("-webkit",  "");
-  @each $prefix in $prefixes {
-    #{$prefix}-transition: $transition;
-  }
-
-  transition: $transition;
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
-/*********************
-CSS3 GRADIENTS
-Be careful with these since they can
-really slow down your CSS. Don't overdo it.
-*********************/
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
 
-/* @include css-gradient(#dfdfdf,#f8f8f8); */
-@mixin css-gradient($from: #dfdfdf, $to: #f8f8f8) {
-	background-color: $to;
-	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
-	background-image: -webkit-linear-gradient(top, $from, $to);
-	background-image: -moz-linear-gradient(top, $from, $to);
-	background-image: -o-linear-gradient(top, $from, $to);
-	background-image: linear-gradient(to bottom, $from, $to);
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@mixin flex-center($direction: column){
+  flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin transition($string: all 0.2s ease-out) {
+  // Use .transition
+  // or .transition(all 1s ease-in)
+    -webkit-transition: $string;
+    -moz-transition:    $string;
+    -ms-transition:     $string;
+    -o-transition:      $string;
+    transition:         $string;
+}
+
+@mixin transformation($string) {
+    -webkit-transform:  $string;
+    -moz-transform:     $string;
+    -ms-transform:      $string;
+    -o-transform:       $string;
+    transform:          $string;
+}
+
+@mixin transform-origin($value){
+  -webkit-transform-origin: $value;
+     -moz-transform-origin: $value;
+      -ms-transform-origin: $value;
+       -o-transform-origin: $value;
+          transform-origin: $value;
 }
 
 /*********************
@@ -198,53 +240,3 @@ probably best not to use it. I mean, were you going to anyway? */
 }
 
 
-/*********************
-BUTTONS
-*********************/
-
-.button, .button:visited {
-	font-family: $sans-serif;
-	border: 1px solid darken($link-color, 13%);
-	border-top-color: darken($link-color, 7%);
-	border-left-color: darken($link-color, 7%);
-	padding: 4px 12px;
-	color: $white;
-	display: inline-block;
-	font-size: 11px;
-	font-weight: bold;
-	text-decoration: none;
-	text-shadow: 0 1px rgba(0,0,0, .75);
-	cursor: pointer;
-	margin-bottom: 20px;
-	line-height: 21px;
-	border-radius: 4px;
-	@include css-gradient($link-color, darken($link-color, 5%));
-
-
-	&:hover, &:focus {
-		color: $white;
-	  	border: 1px solid darken($link-color, 13%);
-	  	border-top-color: darken($link-color, 20%);
-	 	border-left-color: darken($link-color, 20%);
-		@include css-gradient(darken($link-color, 5%), darken($link-color, 10%));
-	}
-
-	&:active {
-		@include css-gradient(darken($link-color, 5%), $link-color);
-	}
-}
-
-.blue-button, .blue-button:visited {
-	border-color: darken($bones-blue, 10%);
-	text-shadow: 0 1px 1px darken($bones-blue, 10%);
-	@include css-gradient( $bones-blue, darken($bones-blue, 5%) );
-	box-shadow: inset 0 0 3px lighten($bones-blue, 16%);
-
-	&:hover, &:focus {
-		border-color: darken($bones-blue, 15%);
-		@include css-gradient( darken($bones-blue, 4%), darken($bones-blue, 10%) );
-	}
-	&:active {
-		@include css-gradient( darken($bones-blue, 5%), $bones-blue );
-	}
-}
